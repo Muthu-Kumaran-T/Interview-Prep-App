@@ -37,6 +37,18 @@ app.use("/api/ai/generate-explanation", protect, generateConceptExplanation);
 //Server uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads"), {}));
 
+// ✅ Serve frontend in production
+if (process.env.NODE_ENV === "production") {
+  const __dirnamePath = path.resolve();
+  app.use(express.static(path.join(__dirnamePath, "dist"))); // no 'frontend' here
+
+  // Catch-all route for React Router
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirnamePath, "dist", "index.html"));
+  });
+}
+
+
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
