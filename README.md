@@ -1,4 +1,3 @@
-Of course. Here is the content of the README file as text:
 
 # Interview Prep AI 🤖✨
 
